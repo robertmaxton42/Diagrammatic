@@ -13,6 +13,58 @@
     <None Remove=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lazy.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Higher\CoreTypes.fs" />
+    <Compile Include="Higher\Category.fs" />
+    <Compile Include="Higher\Functor.fs" />
+    <Compile Include="Higher\Applicative.fs" />
+    <Compile Include="Higher\Monoid.fs" />
+    <Compile Include="Higher\Monad.fs" />
+    <Compile Include="Higher\Comonad.fs" />
+    <Compile Include="Higher\Identity.fs" />
+    <Compile Include="Higher\Traversable.fs" />
+    <Compile Include="Higher\Arrow.fs" />
+    <Compile Include="Higher\Index.fs" />
+    <Compile Include="Higher\Option.fs" />
+    <Compile Include="Higher\Choice.fs" />
+    <Compile Include="Higher\List.fs" />
+    <Compile Include="Higher\Reader.fs" />
+    <Compile Include="Higher\Seq.fs" />
+    <Compile Include="Higher\Writer.fs" />
+    <Compile Include="Higher\State.fs" />
+    <Compile Include="Higher\Cont.fs" />
+    <Compile Include="Higher\MonadTrans.fs" />
+    <Compile Include="Higher\OptionT.fs" />
+    <Compile Include="Higher\ListT.fs" />
+    <Compile Include="Higher\StateT.fs" />
+    <Compile Include="Higher\ReaderT.fs" />
+    <Compile Include="Higher\WriterT.fs" />
+    <Compile Include="Higher\ContT.fs" />
+    <Compile Include="Higher\Algebra.fs" />
+    <Compile Include="Higher\Fix.fs" />
+    <Compile Include="Higher\Cofree.fs" />
+    <Compile Include="Higher\Const.fs" />
+    <Compile Include="Higher\FTLens.fs" />
+    <Compile Include="Higher\PerfectTree.fs" />
+    <Compile Include="Higher\Kleisli.fs" />
+    <Compile Include="Higher\Flip.fs" />
+    <Compile Include="Higher\Leibniz.fs" />
+    <Compile Include="Higher\Compose.fs" />
+    <Compile Include="Higher\Codensity.fs" />
+    <Compile Include="Higher\RightKan.fs" />
+    <Compile Include="Higher\LeftKan.fs" />
+    <Compile Include="Higher\Yoneda.fs" />
+    <Compile Include="Higher\CoYoneda.fs" />
+    <Compile Include="Higher\Adjunction.fs" />
+    <Compile Include="Higher\Fun.fs" />
+    <Compile Include="Higher\Tuple.fs" />
+    <Compile Include="Higher\FFree.fs" />
+    <Compile Include="Higher\Free.fs" />
+    <Compile Include="Higher\Coproduct.fs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="ViewModels\ViewModelBase.fs" />
     <Compile Include="ViewModels\MainWindowViewModel.fs" />
     <Compile Include="Views\MainWindow.axaml.fs" />
