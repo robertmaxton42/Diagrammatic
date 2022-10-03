@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj": {}
+    "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj": {}
   },
   "projects": {
-    "c:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj": {
+    "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
+        "projectUniqueName": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
         "projectName": "Diagrammatic.Tests",
-        "projectPath": "c:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
+        "projectPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
         "packagesPath": "C:\\Users\\rmaxton\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\obj\\",
+        "outputPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rmaxton\\AppData\\Roaming\\NuGet\\NuGet.Config"
