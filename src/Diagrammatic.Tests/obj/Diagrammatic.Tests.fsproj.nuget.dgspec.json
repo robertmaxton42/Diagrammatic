@@ -4,27 +4,27 @@
     "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj": {
+    "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Core\\Diagrammatic.Core.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
-        "projectName": "Diagrammatic.Tests",
-        "projectPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
+        "projectUniqueName": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Core\\Diagrammatic.Core.fsproj",
+        "projectName": "Diagrammatic.Core",
+        "projectPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Core\\Diagrammatic.Core.fsproj",
         "packagesPath": "C:\\Users\\rmaxton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\obj\\",
+        "outputPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rmaxton\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net6.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -38,8 +38,89 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[0.10.18, )",
+              "generatePathProperty": true
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[0.10.18, )",
+              "generatePathProperty": true
+            },
+            "Avalonia.Diagnostics": {
+              "target": "Package",
+              "version": "[0.10.18, )",
+              "generatePathProperty": true
+            },
+            "Avalonia.ReactiveUI": {
+              "target": "Package",
+              "version": "[0.10.18, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
+        "projectName": "Diagrammatic.Tests",
+        "projectPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\Diagrammatic.Tests.fsproj",
+        "packagesPath": "C:\\Users\\rmaxton\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rmaxton\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Core\\Diagrammatic.Core.fsproj": {
+                "projectPath": "C:\\Users\\rmaxton\\Documents\\Coding\\Diagrammatic\\src\\Diagrammatic.Core\\Diagrammatic.Core.fsproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1603",
+            "NU1604",
+            "NU1605",
+            "NU1608"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Expecto": {
               "target": "Package",
@@ -67,24 +148,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.10, 3.1.10]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.25, 3.1.25]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[3.1.0, 3.1.0]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[3.1.0, 3.1.0]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
