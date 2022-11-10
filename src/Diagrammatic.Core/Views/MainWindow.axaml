@@ -12,6 +12,9 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    <Grid ColumnDefinitions="Auto" RowDefinitions="Auto">
+        <Canvas>
+            <Rectangle Fill="Red" Height="44" Width="44"/>
+        </Canvas>
+    </Grid>
 </Window>

@@ -1,3 +1,0 @@
-namespace Diagrammatic
-
-type DiagramObject

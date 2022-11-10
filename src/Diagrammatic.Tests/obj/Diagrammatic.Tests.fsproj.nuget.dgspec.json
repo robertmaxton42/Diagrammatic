@@ -41,6 +41,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Aether": {
+              "target": "Package",
+              "version": "[8.3.1, )",
+              "generatePathProperty": true
+            },
             "Avalonia": {
               "target": "Package",
               "version": "[0.10.18, )",
@@ -59,6 +64,51 @@
             "Avalonia.ReactiveUI": {
               "target": "Package",
               "version": "[0.10.18, )",
+              "generatePathProperty": true
+            },
+            "Avalonia.Remote.Protocol": {
+              "target": "Package",
+              "version": "[0.10.18, )",
+              "generatePathProperty": true
+            },
+            "FSharp.Core": {
+              "target": "Package",
+              "version": "[6.0.6, )",
+              "generatePathProperty": true
+            },
+            "FSharp.FGL": {
+              "target": "Package",
+              "version": "[0.0.3, )",
+              "generatePathProperty": true
+            },
+            "JetBrains.Annotations": {
+              "target": "Package",
+              "version": "[2022.1.0, )",
+              "generatePathProperty": true
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )",
+              "generatePathProperty": true
+            },
+            "System.Memory": {
+              "target": "Package",
+              "version": "[4.5.5, )",
+              "generatePathProperty": true
+            },
+            "System.Reactive": {
+              "target": "Package",
+              "version": "[5.0.0, )",
+              "generatePathProperty": true
+            },
+            "System.Runtime.CompilerServices.Unsafe": {
+              "target": "Package",
+              "version": "[6.0.0, )",
+              "generatePathProperty": true
+            },
+            "System.ValueTuple": {
+              "target": "Package",
+              "version": "[4.5.0, )",
               "generatePathProperty": true
             }
           },

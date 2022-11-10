@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Aether/8.3.1": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.3.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Aether.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Aether.dll": {}
+        }
+      },
       "Avalonia/0.10.18": {
         "type": "package",
         "dependencies": {
@@ -247,57 +259,74 @@
           "lib/netstandard2.0/Expecto.dll": {}
         }
       },
-      "FSharp.Core/4.6.2": {
+      "FSharp.Core/6.0.6": {
         "type": "package",
         "compile": {
-          "lib/netstandard1.6/FSharp.Core.dll": {}
+          "lib/netstandard2.1/FSharp.Core.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.6/FSharp.Core.dll": {}
+          "lib/netstandard2.1/FSharp.Core.dll": {}
         },
         "resource": {
-          "lib/netstandard1.6/cs/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/cs/FSharp.Core.resources.dll": {
             "locale": "cs"
           },
-          "lib/netstandard1.6/de/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/de/FSharp.Core.resources.dll": {
             "locale": "de"
           },
-          "lib/netstandard1.6/en/FSharp.Core.resources.dll": {
-            "locale": "en"
-          },
-          "lib/netstandard1.6/es/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/es/FSharp.Core.resources.dll": {
             "locale": "es"
           },
-          "lib/netstandard1.6/fr/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/fr/FSharp.Core.resources.dll": {
             "locale": "fr"
           },
-          "lib/netstandard1.6/it/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/it/FSharp.Core.resources.dll": {
             "locale": "it"
           },
-          "lib/netstandard1.6/ja/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/ja/FSharp.Core.resources.dll": {
             "locale": "ja"
           },
-          "lib/netstandard1.6/ko/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/ko/FSharp.Core.resources.dll": {
             "locale": "ko"
           },
-          "lib/netstandard1.6/pl/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/pl/FSharp.Core.resources.dll": {
             "locale": "pl"
           },
-          "lib/netstandard1.6/pt-BR/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/pt-BR/FSharp.Core.resources.dll": {
             "locale": "pt-BR"
           },
-          "lib/netstandard1.6/ru/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/ru/FSharp.Core.resources.dll": {
             "locale": "ru"
           },
-          "lib/netstandard1.6/tr/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/tr/FSharp.Core.resources.dll": {
             "locale": "tr"
           },
-          "lib/netstandard1.6/zh-Hans/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/zh-Hans/FSharp.Core.resources.dll": {
             "locale": "zh-Hans"
           },
-          "lib/netstandard1.6/zh-Hant/FSharp.Core.resources.dll": {
+          "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll": {
             "locale": "zh-Hant"
           }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
+      "FSharp.FGL/0.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Aether": "8.3.1",
+          "FSharp.Core": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/FSharp.FGL.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.FGL.dll": {}
         }
       },
       "HarfBuzzSharp/2.8.2.1-preview.108": {
@@ -394,16 +423,13 @@
           }
         }
       },
-      "JetBrains.Annotations/10.3.0": {
+      "JetBrains.Annotations/2022.1.0": {
         "type": "package",
-        "dependencies": {
-          "System.Runtime": "4.1.0"
-        },
         "compile": {
-          "lib/netstandard1.0/JetBrains.Annotations.dll": {}
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.0/JetBrains.Annotations.dll": {}
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {}
         }
       },
       "Microsoft.CodeAnalysis.Analyzers/2.9.6": {
@@ -1176,13 +1202,13 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "System.ComponentModel.Annotations/4.5.0": {
+      "System.ComponentModel.Annotations/5.0.0": {
         "type": "package",
         "compile": {
-          "ref/netcoreapp2.0/_._": {}
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp2.0/_._": {}
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {}
         }
       },
       "System.Diagnostics.Debug/4.3.0": {
@@ -1351,7 +1377,7 @@
           "lib/netstandard1.6/System.Linq.Expressions.dll": {}
         }
       },
-      "System.Memory/4.5.3": {
+      "System.Memory/4.5.5": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.1/_._": {}
@@ -1780,10 +1806,20 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Aether": "8.3.1",
           "Avalonia": "0.10.18",
           "Avalonia.Desktop": "0.10.18",
           "Avalonia.Diagnostics": "0.10.18",
-          "Avalonia.ReactiveUI": "0.10.18"
+          "Avalonia.ReactiveUI": "0.10.18",
+          "Avalonia.Remote.Protocol": "0.10.18",
+          "FSharp.Core": "6.0.6",
+          "FSharp.FGL": "0.0.3",
+          "JetBrains.Annotations": "2022.1.0",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "System.Memory": "4.5.5",
+          "System.Reactive": "5.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.ValueTuple": "4.5.0"
         },
         "compile": {
           "bin/placeholder/Diagrammatic.Core.dll": {}
@@ -1795,6 +1831,24 @@
     }
   },
   "libraries": {
+    "Aether/8.3.1": {
+      "sha512": "GKedgXPkm3nUO+Zbj9suNFQ/wCjw30ixUTgnrPvj0oJ9WiAyy1kDacJTHgTPTjyD1RILuDEPTPwsKGWlSpWLOw==",
+      "type": "package",
+      "path": "aether/8.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aether.8.3.1.nupkg.sha512",
+        "aether.nuspec",
+        "lib/net45/Aether.dll",
+        "lib/net45/Aether.pdb",
+        "lib/net45/Aether.xml",
+        "lib/netstandard2.0/Aether.dll",
+        "lib/netstandard2.0/Aether.pdb",
+        "lib/netstandard2.0/Aether.xml",
+        "paket-installmodel.cache"
+      ]
+    },
     "Avalonia/0.10.18": {
       "sha512": "hA7US1I75f+ztOyqFWXdzkyJDU9FxcMktfmnmey2uPb+9Cn2GSTU+/7t08CMAyMxuCBpWjlOwkdCZh1cPFWHpg==",
       "type": "package",
@@ -2130,51 +2184,63 @@
         "paket-installmodel.cache"
       ]
     },
-    "FSharp.Core/4.6.2": {
-      "sha512": "/waJ3a7u7MjFOGnXOfokbG1N1FH7VCmP3Fw1tJ8Q75kIj60LYBL3eYzab9hDimL5E21uhQ/1wf04M3dRAYemlw==",
+    "FSharp.Core/6.0.6": {
+      "sha512": "oSbTFqPtsp+EGkWAHwYIYYHyXLJRnbzVwcmM06kmXNLdWsp3P6XZViPSJJ2qUQS8feNK+nyPA0qtpNZXANGB7w==",
       "type": "package",
-      "path": "fsharp.core/4.6.2",
+      "path": "fsharp.core/6.0.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "fsharp.core.4.6.2.nupkg.sha512",
+        "Icon.png",
+        "contentFiles/any/netstandard2.0/FSharp.Core.xml",
+        "contentFiles/any/netstandard2.1/FSharp.Core.xml",
+        "fsharp.core.6.0.6.nupkg.sha512",
         "fsharp.core.nuspec",
-        "lib/net45/FSharp.Core.dll",
-        "lib/net45/FSharp.Core.optdata",
-        "lib/net45/FSharp.Core.sigdata",
-        "lib/net45/FSharp.Core.xml",
-        "lib/net45/cs/FSharp.Core.resources.dll",
-        "lib/net45/de/FSharp.Core.resources.dll",
-        "lib/net45/en/FSharp.Core.resources.dll",
-        "lib/net45/es/FSharp.Core.resources.dll",
-        "lib/net45/fr/FSharp.Core.resources.dll",
-        "lib/net45/it/FSharp.Core.resources.dll",
-        "lib/net45/ja/FSharp.Core.resources.dll",
-        "lib/net45/ko/FSharp.Core.resources.dll",
-        "lib/net45/pl/FSharp.Core.resources.dll",
-        "lib/net45/pt-BR/FSharp.Core.resources.dll",
-        "lib/net45/ru/FSharp.Core.resources.dll",
-        "lib/net45/tr/FSharp.Core.resources.dll",
-        "lib/net45/zh-Hans/FSharp.Core.resources.dll",
-        "lib/net45/zh-Hant/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/FSharp.Core.dll",
-        "lib/netstandard1.6/FSharp.Core.optdata",
-        "lib/netstandard1.6/FSharp.Core.sigdata",
-        "lib/netstandard1.6/FSharp.Core.xml",
-        "lib/netstandard1.6/cs/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/de/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/en/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/es/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/fr/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/it/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/ja/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/ko/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/pl/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/pt-BR/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/ru/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/tr/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/zh-Hans/FSharp.Core.resources.dll",
-        "lib/netstandard1.6/zh-Hant/FSharp.Core.resources.dll"
+        "lib/netstandard2.0/FSharp.Core.dll",
+        "lib/netstandard2.0/FSharp.Core.xml",
+        "lib/netstandard2.0/cs/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/de/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/es/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/fr/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/it/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/ja/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/ko/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/pl/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/pt-BR/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/ru/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/tr/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/zh-Hans/FSharp.Core.resources.dll",
+        "lib/netstandard2.0/zh-Hant/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/FSharp.Core.dll",
+        "lib/netstandard2.1/FSharp.Core.xml",
+        "lib/netstandard2.1/cs/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/de/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/es/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/fr/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/it/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/ja/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/ko/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/pl/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/pt-BR/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/ru/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/tr/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/zh-Hans/FSharp.Core.resources.dll",
+        "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll",
+        "paket-installmodel.cache"
+      ]
+    },
+    "FSharp.FGL/0.0.3": {
+      "sha512": "xybVW5xKprYq+OSKktHWfdegPDgnsXGCS5TSXggUA+1L2gF+fjsC6C/NTnpim3j5O3lQr8y84OChoKGoeSdKNw==",
+      "type": "package",
+      "path": "fsharp.fgl/0.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fsharp.fgl.0.0.3.nupkg.sha512",
+        "fsharp.fgl.nuspec",
+        "lib/netstandard2.0/FSharp.FGL.dll",
+        "lib/netstandard2.0/FSharp.FGL.xml",
+        "paket-installmodel.cache"
       ]
     },
     "HarfBuzzSharp/2.8.2.1-preview.108": {
@@ -2346,23 +2412,27 @@
         "runtimes/win-x86/native/libHarfBuzzSharp.dll"
       ]
     },
-    "JetBrains.Annotations/10.3.0": {
-      "sha512": "0GLU9lwGVXjUNlr9ZIdAgjqLI2Zm/XFGJFaqJ1T1sU+kwfeMLhm68+rblUrNUP9psRl4i8yM7Ghb4ia4oI2E5g==",
+    "JetBrains.Annotations/2022.1.0": {
+      "sha512": "ASfpoFJxiRsC9Xc4TWuPM41Zb/gl64xwfMOhnOZ3RnVWGYIZchjpWQV5zshJgoc/ZxVtgjaF7b577lURj7E6ig==",
       "type": "package",
-      "path": "jetbrains.annotations/10.3.0",
+      "path": "jetbrains.annotations/2022.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "jetbrains.annotations.10.3.0.nupkg.sha512",
+        "icon.png",
+        "jetbrains.annotations.2022.1.0.nupkg.sha512",
         "jetbrains.annotations.nuspec",
-        "lib/net/JetBrains.Annotations.dll",
-        "lib/net/JetBrains.Annotations.xml",
+        "lib/net20/JetBrains.Annotations.dll",
+        "lib/net20/JetBrains.Annotations.xml",
+        "lib/netstandard1.0/JetBrains.Annotations.deps.json",
         "lib/netstandard1.0/JetBrains.Annotations.dll",
         "lib/netstandard1.0/JetBrains.Annotations.xml",
-        "lib/portable-net4+sl4+wp7+netcore45/JetBrains.Annotations.dll",
-        "lib/portable-net4+sl4+wp7+netcore45/JetBrains.Annotations.xml",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/JetBrains.Annotations.dll",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/JetBrains.Annotations.xml"
+        "lib/netstandard2.0/JetBrains.Annotations.deps.json",
+        "lib/netstandard2.0/JetBrains.Annotations.dll",
+        "lib/netstandard2.0/JetBrains.Annotations.xml",
+        "lib/portable40-net40+sl5+win8+wp8+wpa81/JetBrains.Annotations.dll",
+        "lib/portable40-net40+sl5+win8+wp8+wpa81/JetBrains.Annotations.xml",
+        "paket-installmodel.cache"
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/2.9.6": {
@@ -3644,13 +3714,14 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.ComponentModel.Annotations/4.5.0": {
-      "sha512": "UxYQ3FGUOtzJ7LfSdnYSFd7+oEv6M8NgUatatIN2HxNtDdlcvFAf+VIq4Of9cDMJEJC0aSRv/x898RYhB4Yppg==",
+    "System.ComponentModel.Annotations/5.0.0": {
+      "sha512": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg==",
       "type": "package",
-      "path": "system.componentmodel.annotations/4.5.0",
+      "path": "system.componentmodel.annotations/5.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/MonoAndroid10/_._",
@@ -3658,16 +3729,17 @@
         "lib/net45/_._",
         "lib/net461/System.ComponentModel.Annotations.dll",
         "lib/netcore50/System.ComponentModel.Annotations.dll",
-        "lib/netcoreapp2.0/_._",
         "lib/netstandard1.4/System.ComponentModel.Annotations.dll",
         "lib/netstandard2.0/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.1/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.1/System.ComponentModel.Annotations.xml",
         "lib/portable-net45+win8/_._",
-        "lib/uap10.0.16299/_._",
         "lib/win8/_._",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
+        "paket-installmodel.cache",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
         "ref/net45/_._",
@@ -3684,7 +3756,6 @@
         "ref/netcore50/ru/System.ComponentModel.Annotations.xml",
         "ref/netcore50/zh-hans/System.ComponentModel.Annotations.xml",
         "ref/netcore50/zh-hant/System.ComponentModel.Annotations.xml",
-        "ref/netcoreapp2.0/_._",
         "ref/netstandard1.1/System.ComponentModel.Annotations.dll",
         "ref/netstandard1.1/System.ComponentModel.Annotations.xml",
         "ref/netstandard1.1/de/System.ComponentModel.Annotations.xml",
@@ -3720,14 +3791,15 @@
         "ref/netstandard1.4/zh-hant/System.ComponentModel.Annotations.xml",
         "ref/netstandard2.0/System.ComponentModel.Annotations.dll",
         "ref/netstandard2.0/System.ComponentModel.Annotations.xml",
+        "ref/netstandard2.1/System.ComponentModel.Annotations.dll",
+        "ref/netstandard2.1/System.ComponentModel.Annotations.xml",
         "ref/portable-net45+win8/_._",
-        "ref/uap10.0.16299/_._",
         "ref/win8/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.componentmodel.annotations.4.5.0.nupkg.sha512",
+        "system.componentmodel.annotations.5.0.0.nupkg.sha512",
         "system.componentmodel.annotations.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -4344,22 +4416,25 @@
         "system.linq.expressions.nuspec"
       ]
     },
-    "System.Memory/4.5.3": {
-      "sha512": "3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+    "System.Memory/4.5.5": {
+      "sha512": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
       "type": "package",
-      "path": "system.memory/4.5.3",
+      "path": "system.memory/4.5.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Memory.dll",
+        "lib/net461/System.Memory.xml",
         "lib/netcoreapp2.1/_._",
         "lib/netstandard1.1/System.Memory.dll",
         "lib/netstandard1.1/System.Memory.xml",
         "lib/netstandard2.0/System.Memory.dll",
         "lib/netstandard2.0/System.Memory.xml",
+        "paket-installmodel.cache",
         "ref/netcoreapp2.1/_._",
-        "system.memory.4.5.3.nupkg.sha512",
+        "system.memory.4.5.5.nupkg.sha512",
         "system.memory.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"

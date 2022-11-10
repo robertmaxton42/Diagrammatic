@@ -1,13 +1,14 @@
 source https://api.nuget.org/v3/index.json
 
 storage: none
-framework: net6.0//, netstandard2.0, netstandard2.1
+framework: net6.0 
+//, netstandard2.0, netstandard2.1
 
 
 nuget FSharp.Core ~> 6
 
-//git https://github.com/CSBiology/FSharp.FGL.git developer build: "build.cmd Pack", Packages: /bin/, OS: windows
-//nuget FSharp.FGL
+git https://github.com/CSBiology/FSharp.FGL.git developer build: "build.cmd Pack", Packages: /bin/, OS: windows
+nuget FSharp.FGL
 
 nuget Avalonia.Desktop
 nuget Elmish
