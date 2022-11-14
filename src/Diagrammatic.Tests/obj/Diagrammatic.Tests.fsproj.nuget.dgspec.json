@@ -172,14 +172,104 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[0.10.18, )",
+              "generatePathProperty": true
+            },
+            "Avalonia.Remote.Protocol": {
+              "target": "Package",
+              "version": "[0.10.18, )",
+              "generatePathProperty": true
+            },
             "Expecto": {
               "target": "Package",
               "version": "[9.*, )",
               "generatePathProperty": true
             },
+            "Expecto.VisualStudio.TestAdapter": {
+              "target": "Package",
+              "version": "[10.0.2, )",
+              "generatePathProperty": true
+            },
+            "FSharp.Core": {
+              "target": "Package",
+              "version": "[6.0.6, )",
+              "generatePathProperty": true
+            },
+            "JetBrains.Annotations": {
+              "target": "Package",
+              "version": "[2022.1.0, )",
+              "generatePathProperty": true
+            },
+            "Microsoft.CodeCoverage": {
+              "target": "Package",
+              "version": "[17.3.2, )",
+              "generatePathProperty": true
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.*, )",
+              "generatePathProperty": true
+            },
+            "Microsoft.TestPlatform.ObjectModel": {
+              "target": "Package",
+              "version": "[17.3.2, )",
+              "generatePathProperty": true
+            },
+            "Microsoft.TestPlatform.TestHost": {
+              "target": "Package",
+              "version": "[17.3.2, )",
+              "generatePathProperty": true
+            },
+            "Mono.Cecil": {
+              "target": "Package",
+              "version": "[0.11.4, )",
+              "generatePathProperty": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )",
+              "generatePathProperty": true
+            },
+            "NuGet.Frameworks": {
+              "target": "Package",
+              "version": "[6.3.0, )",
+              "generatePathProperty": true
+            },
+            "System.Collections.Immutable": {
+              "target": "Package",
+              "version": "[6.0.0, )",
+              "generatePathProperty": true
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )",
+              "generatePathProperty": true
+            },
+            "System.Memory": {
+              "target": "Package",
+              "version": "[4.5.5, )",
+              "generatePathProperty": true
+            },
+            "System.Reactive": {
+              "target": "Package",
+              "version": "[5.0.0, )",
+              "generatePathProperty": true
+            },
+            "System.Reflection.Metadata": {
+              "target": "Package",
+              "version": "[6.0.1, )",
+              "generatePathProperty": true
+            },
+            "System.Runtime.CompilerServices.Unsafe": {
+              "target": "Package",
+              "version": "[6.0.0, )",
+              "generatePathProperty": true
+            },
+            "System.ValueTuple": {
+              "target": "Package",
+              "version": "[4.5.0, )",
               "generatePathProperty": true
             },
             "YoloDev.Expecto.TestSdk": {

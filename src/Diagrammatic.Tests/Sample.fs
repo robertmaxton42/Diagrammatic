@@ -2,7 +2,7 @@ module Tests
 
 open Expecto
 open Diagrammatic.Fix
-open Diagrammatic.Lazy
+//open Diagrammatic.Lazy
 
 [<Tests>]
 let tests =
