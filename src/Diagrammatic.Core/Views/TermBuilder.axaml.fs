@@ -4,8 +4,8 @@ open Avalonia
 open Avalonia.Controls
 open Avalonia.Markup.Xaml
 
-type TermViewer () as this = 
-    inherit Canvas ()
+type TermBuilder () as this = 
+    inherit UserControl ()
 
     do this.InitializeComponent()
 

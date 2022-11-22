@@ -25,6 +25,8 @@
                 <MenuItem Header="Paste"/>
             </MenuItem>
         </Menu>
-        <Views:TermViewer DockPanel.Dock="Bottom"/>
+        <Views:TermViewer DockPanel.Dock="Bottom">
+            <Rectangle Fill="Red" Height="44" Width="44"/>
+        </Views:TermViewer>
     </DockPanel>
 </Window>
