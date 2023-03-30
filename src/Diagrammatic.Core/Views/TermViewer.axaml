@@ -1,7 +1,45 @@
 <Canvas xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Diagrammatic.Core.Views.TermViewer" />
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="using:System"
+        xmlns:scg="using:System.Collections.Generic"
+        xmlns:v="using:Diagrammatic.Core.Views"
+        xmlns:vm="using:Diagrammatic.Core.ViewModels"
+        xmlns:core="using:Diagrammatic.Core"
+        xmlns:fgl="using:FSharp.FGL"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Diagrammatic.Core.Views.TermViewer"
+        x:DataType="vm:TermViewerViewModel">
+
+    <ItemsControl Items="{Binding graph}" x:CompileBindings="True">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Canvas />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.Styles>
+            <Style Selector="Canvas > ContentPresenter"
+                    x:DataType="scg:KeyValuePair" 
+                    x:TypeArguments="
+                        core:Node(vm:NodeViewData),
+                        sys:Tuple(core:Node(vm:NodeViewData), vm:NodeViewData, core:Edge)">
+                <Setter Property="Canvas.Left" Value="{Binding Value.Item2.x}" />
+                <Setter Property="Canvas.Top" Value="{Binding Value.Item2.y}" />
+            </Style>
+        </ItemsControl.Styles>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="scg:KeyValuePair">
+            <!--
+                            x:TypeArguments="
+                                core:Node(vm:NodeViewData),
+                                sys:Tuple(core:Node(vm:NodeViewData), vm:NodeViewData, core:Edge)"-->
+                <Ellipse Fill="Blue" Height="50" Width="50"/> 
+                    <!--Canvas.Left="{Binding Value.Item2.x}" 
+                    Canvas.Top="{Binding Value.Item2.y}"
+                    ZIndex="{Binding Value.Item2.z}"/>-->
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</Canvas>
 

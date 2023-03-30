@@ -12,10 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\ViewModelBase.fs" />
+    <Compile Include="ViewModels\TermViewerViewModel.fs" />
     <Compile Include="ViewModels\MainWindowViewModel.fs" />
+    <Compile Include="Views\MainWindow.axaml.fs" />
     <Compile Include="Views\TermViewer.axaml.fs" />
     <Compile Include="Views\TermBuilder.axaml.fs" />
-    <Compile Include="Views\MainWindow.axaml.fs" />
     <Compile Include="ViewLocator.fs" />
     <Compile Include="App.axaml.fs" />
   </ItemGroup>
@@ -26,6 +27,7 @@
   <ItemGroup>
     <Compile Include="Lazy.fs" />
     <Compile Include="Fix.fs" />
+    <Compile Include="FGLExt.fs" />
   </ItemGroup>
   <!--<ItemGroup>
     <Reference Include="paket-files\github.com\CSBiology\FSharp.FGL\bin\FSharp.FGL\net6.0\FSharp.FGL.dll" />

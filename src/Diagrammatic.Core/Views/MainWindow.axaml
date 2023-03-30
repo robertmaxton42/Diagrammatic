@@ -1,7 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="using:Diagrammatic.Core.Views"
         xmlns:vm="using:Diagrammatic.Core.ViewModels"
-        xmlns:Views="using:Diagrammatic.Core.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -12,6 +12,15 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+
+    
+    <Window.Styles>
+        <Style Selector="ItemsControl > Control">
+            <Setter Property="Canvas.Left" Value="{Binding Value.Item2.x}" />
+            <Setter Property="Canvas.Top" Value="{Binding Value.Item2.y}" />
+            <Setter Property="ZIndex" Value="{Binding Value.Item2.z}" />
+        </Style>
+    </Window.Styles>
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -25,8 +34,6 @@
                 <MenuItem Header="Paste"/>
             </MenuItem>
         </Menu>
-        <Views:TermViewer DockPanel.Dock="Bottom">
-            <Rectangle Fill="Red" Height="44" Width="44"/>
-        </Views:TermViewer>
+        <v:TermViewer DockPanel.Dock="Bottom"/>
     </DockPanel>
 </Window>
