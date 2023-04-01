@@ -8,7 +8,9 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PathLength.fs" />
     <Compile Include="Models\Diagram.fs" />
+    <Compile Incldue="PathLength.fs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\ViewModelBase.fs" />
@@ -17,6 +19,7 @@
     <Compile Include="Views\MainWindow.axaml.fs" />
     <Compile Include="Views\TermViewer.axaml.fs" />
     <Compile Include="Views\TermBuilder.axaml.fs" />
+    <Compile Include="Views\NodeControl.axaml.fs" />
     <Compile Include="ViewLocator.fs" />
     <Compile Include="App.axaml.fs" />
   </ItemGroup>

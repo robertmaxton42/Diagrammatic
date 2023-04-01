@@ -4,6 +4,8 @@ open Avalonia
 open Avalonia.Controls
 open Avalonia.Markup.Xaml
 
+open Diagrammatic.Core.ViewModels
+
 type TermViewer () as this = 
     inherit Canvas ()
 
@@ -11,3 +13,4 @@ type TermViewer () as this =
 
     member private this.InitializeComponent() =
         AvaloniaXamlLoader.Load(this)
+        this.DataContext <- TermViewerViewModel()

@@ -1,19 +1,16 @@
-<Canvas xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sys="using:System"
-        xmlns:scg="using:System.Collections.Generic"
-        xmlns:v="using:Diagrammatic.Core.Views"
-        xmlns:vm="using:Diagrammatic.Core.ViewModels"
-        xmlns:core="using:Diagrammatic.Core"
-        xmlns:fgl="using:FSharp.FGL"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Diagrammatic.Core.Views.TermViewer"
-        x:DataType="vm:TermViewerViewModel">
-
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Diagrammatic.Core.ViewModels"
+             x:Class="Diagrammatic.Core.Views.NodeControl"
+             x:DataType="vm:LabeledNodeWrapper"
+             mc:Ignorable="d"
+             d:DesignWidth="100"
+             d:DesignHeight="100">
+    <Path x:Name="NodeShape" Stroke="Black" StrokeThickness="1"/>
     <Border Width="800" Height="600">
-        <ItemsControl Items="{Binding nodes}" x:CompileBindings="True">
+        <ItemsControl Items="{Binding Node.Node.ports}" x:CompileBindings="True">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas />
@@ -33,5 +30,4 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Border>
-</Canvas>
-
+</UserControl>
