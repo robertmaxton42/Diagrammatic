@@ -1,6 +1,8 @@
 namespace Diagrammatic.Core
 
 open FSharp.FGL
+open Aether
+open Aether.Operators
 
 (*  
     A Diagram<'label> is either a relation between terms, or a bare term, with labels of 
@@ -34,7 +36,7 @@ open FSharp.FGL
 
 
 type EdgeData = SimpleEdge of string
-type Edge<'label> = 
+type Edge<'label when 'label: equality> = 
     struct
         val data: EdgeData
         val label: 'label
@@ -42,13 +44,14 @@ type Edge<'label> =
         new (data, label) = {data = data; label = label}
     end
 
+
 [<CustomEquality>]
 [<CustomComparison>]
-type Node<'p, 'e> = 
+type Node<'p, 'e when 'e: equality> = 
     struct
         val id: int
         val kind: NodeKind<'p, 'e>
-        val ports: Port<'p, 'e> seq seq
+        val ports: PortGroup<'p, 'e> seq
         new (id, kind, pempty) = {id = id; kind = kind; ports = pempty}
         //pempty should be a collection of collections, each representing a group of ports
         //fixed-size collections represent groups with an undetermined number of ports 
@@ -74,13 +77,92 @@ type Node<'p, 'e> =
         interface System.IComparable with
             member this.CompareTo(other) = this.CompareTo(other)
     end
-and NodeKind<'p, 'e> = OpNode of Op<'p, 'e> | SimpleNode of string
-and Op<'p, 'e> = {op: string; subg: Graph<PortID<'p, 'e>, 'p, Edge<'e>>}
-and PortID<'p, 'e> = { parent: Node<'p, 'e>; group: int; id: int }
-and Port<'p, 'e> = LVertex<PortID<'p, 'e>, 'p>
+and NodeKind<'p, 'e when 'e: equality> = OpNode of Op<'p, 'e> | SimpleNode of string
+and Op<'p, 'e when 'e: equality> = {op: string; subg: Graph<PortID<'p, 'e>, 'p, Edge<'e>>}
+and PortID<'p, 'e when 'e: equality> = 
+    { parent: Node<'p, 'e> option; group: int; id: int }
+    static member parent_: Prism<PortID<'p, 'e>, _> =
+        (fun p -> p.parent), (fun n p -> {p with parent = Some n})
+and Port<'p, 'e when 'e: equality> = LVertex<PortID<'p, 'e>, 'p>
+and PortGroup<'p, 'e when 'e: equality> =
+    FixedGroup of Port<'p, 'e> array | MutableGroup of Port<'p, 'e> list
+    interface System.Collections.Generic.IEnumerable<Port<'p,'e>> with
+        member this.GetEnumerator() =
+            match this with
+            | FixedGroup arr -> arr.GetEnumerator()
+            | MutableGroup l -> (List.toSeq l).GetEnumerator()
 
-type LabeledNode<'n, 'p, 'e> = LabeledNode of node: Node<'p, 'e> * label: 'n
-type Term<'n, 'p, 'e> = LabeledNode<'n, 'p, 'e> list * Graph<PortID<'p, 'e>, 'p, Edge<'e>>
+//port_structure should be a collection of groups -- either an array of ports of the intended 
+// fixed size or a list with the default/starting number of ports. `parent` should be set to None.
+type NodeTemplate(kind: NodeKind<'p, 'e>, port_structure: PortGroup<'p, 'e> seq) =
+    member this.kind = kind 
+    member this.port_structure = port_structure
+
+    member this.coinNode id = 
+        let parentLens = fst_ >-> PortID.parent_
+        let rec out = 
+            Node<'p, 'e>(id, kind, 
+                seq {
+                    for group in port_structure do
+                        for port in group -> 
+                            (out ^= parentLens) port 
+                }
+            )
+        out
+
+
+
+[<CustomEquality>]
+[<CustomComparison>]
+type LabeledNode<'n, 'p, 'e when 'e: equality> = 
+    | LabeledNode of node: Node<'p, 'e> * label: 'n
+
+    //Labeled nodes are the same if the nodes (not the labels) are the same.
+    override this.Equals(other) =
+        let (LabeledNode(thisn, _)) = this
+        match other with
+        | :? LabeledNode<'n, 'p, 'e> as ln -> 
+            let (LabeledNode(thatn, _)) = ln
+            thisn = thatn
+        | _ -> false
+
+    member this.CompareTo(other: obj) =
+        let (LabeledNode(thisn, _)) = this
+        match other with
+        | :? LabeledNode<'n, 'p, 'e> as ln -> 
+            let (LabeledNode(thatn, _)) = ln
+            thisn.CompareTo(thatn)
+        | _ -> raise (System.ArgumentException("Object must be of type LabeledNode"))
+
+    override this.GetHashCode() = 
+        let (LabeledNode(thisn, _)) = this
+        thisn.GetHashCode()
+
+    interface System.IComparable with
+        member this.CompareTo(other) = this.CompareTo(other)
+
+type Term<'n, 'p, 'e when 'e: equality> (nodes: LabeledNode<'n, 'p, 'e> list, graph: Graph<PortID<'p, 'e>, 'p, Edge<'e>>)= 
+    member this.Nodes = nodes
+        //and private set n = nodes <- n 
+    member this.Graph = graph
+        //and private set g = graph <- g
+
+    member this.addNode (node: LabeledNode<'n, 'p, 'e>) =
+        let (LabeledNode (n, _)) = node
+        new Term<'n, 'p, 'e>(
+            node::nodes, 
+            Vertices.addMany (List.ofSeq <| Seq.concat n.ports) graph
+        )
+
+    member this.removeNode (node: LabeledNode<'n, 'p, 'e>) =
+        let (LabeledNode (n, _)) = node
+        new Term<'n, 'p, 'e>( 
+            List.filter ((<>) node) nodes,
+            Vertices.removeMany (
+                List.ofSeq <| seq {
+                        for port, _ in Seq.concat n.ports -> port
+                }) graph
+        )
 
 (*
 [<CustomEquality>]

@@ -28,7 +28,10 @@
             </ItemsControl.Styles>
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="vm:LabeledNodeWrapper">
-                    <v:NodeControl />
+                    <v:NodeControl 
+                        PointerPressed="OnNodePointerPressed" 
+                        PointerMoved="OnNodePointerMoved" 
+                        PointerReleased="OnNodePointerReleased" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

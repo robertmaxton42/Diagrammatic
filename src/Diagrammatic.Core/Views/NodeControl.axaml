@@ -2,32 +2,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="using:Diagrammatic.Core.Views"
              xmlns:vm="using:Diagrammatic.Core.ViewModels"
+             xmlns:ac="using:Avalonia.Collections"
              x:Class="Diagrammatic.Core.Views.NodeControl"
              x:DataType="vm:LabeledNodeWrapper"
              mc:Ignorable="d"
              d:DesignWidth="100"
-             d:DesignHeight="100">
-    <Path x:Name="NodeShape" Stroke="Black" StrokeThickness="1"/>
-    <Border Width="800" Height="600">
-        <ItemsControl Items="{Binding Node.Node.ports}" x:CompileBindings="True">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.Styles>
-                <Style Selector="ContentPresenter"
-                        x:DataType="vm:LabeledNodeWrapper"> 
-                    <Setter Property="Canvas.Left" Value="{Binding Label.x}" />
-                    <Setter Property="Canvas.Top" Value="{Binding Label.y}" />
-                </Style>
-            </ItemsControl.Styles>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="vm:LabeledNodeWrapper">
-                    <v:NodeControl />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Border>
+             d:DesignHeight="100" ClipToBounds="False">
+        <Canvas ClipToBounds="False">
+            <Path x:Name="NodeShape" Stroke="Black" StrokeThickness="1"/>    
+            <ItemsControl 
+                x:CompileBindings="True"
+                Items="{Binding $parent[v:NodeControl].RenderedPorts}"
+                ClipToBounds="False">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas ClipToBounds="False"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Styles>
+                    <Style Selector="ContentPresenter" x:DataType="Point"> 
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                    </Style>
+                </ItemsControl.Styles>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="Point">
+                        <v:CenteredEllipse Fill="Black" Height="4" Width="4" ZIndex="1"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Canvas.RenderTransform>
+                <TranslateTransform X="{Binding #NodeShape.Width, Converter={x:Static v:PositionConverter.Instance}, ConverterParameter=-0.5}"
+                                    Y="{Binding #NodeShape.Height, Converter={x:Static v:PositionConverter.Instance}, ConverterParameter=-0.5}" />
+            </Canvas.RenderTransform>
+        </Canvas>
 </UserControl>
