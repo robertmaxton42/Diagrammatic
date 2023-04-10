@@ -132,7 +132,11 @@ type NodeControl() as this =
             nodeShape.Fill <- SolidColorBrush(Colors.Transparent)
 
     member private this.RenderPorts() =
-        this.RenderedPorts <- AvaloniaList(Seq.map (snd >> getPortPoint) this.Ports)
+        this.RenderedPorts <- AvaloniaList(
+            Seq.map 
+                (fun (port: Port<_,_>) -> getPortPoint (snd port).Value) 
+                this.Ports
+            )
 
     member private this.InitializeComponent() =
         AvaloniaXamlLoader.Load(this)

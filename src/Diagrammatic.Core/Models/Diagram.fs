@@ -39,7 +39,7 @@ type EdgeData = SimpleEdge of string
 type Edge<'label when 'label: equality> = 
     struct
         val data: EdgeData
-        val label: 'label
+        val label: 'label ref
 
         new (data, label) = {data = data; label = label}
     end
@@ -83,7 +83,7 @@ and PortID<'p, 'e when 'e: equality> =
     { parent: Node<'p, 'e> option; group: int; id: int }
     static member parent_: Prism<PortID<'p, 'e>, _> =
         (fun p -> p.parent), (fun n p -> {p with parent = Some n})
-and Port<'p, 'e when 'e: equality> = LVertex<PortID<'p, 'e>, 'p>
+and Port<'p, 'e when 'e: equality> = LVertex<PortID<'p, 'e>, 'p ref>
 and PortGroup<'p, 'e when 'e: equality> =
     | FixedGroup of Port<'p, 'e> array 
     | MutableGroup of Port<'p, 'e> list
@@ -119,12 +119,10 @@ type NodeTemplate<'p, 'e when 'e: equality>(kind: NodeKind<'p, 'e>, port_structu
             )
         out
 
-
-
 [<CustomEquality>]
 [<CustomComparison>]
 type LabeledNode<'n, 'p, 'e when 'e: equality> = 
-    | LabeledNode of node: Node<'p, 'e> * label: 'n
+    | LabeledNode of node: Node<'p, 'e> * label: 'n ref
 
     //Labeled nodes are the same if the nodes (not the labels) are the same.
     override this.Equals(other) =
@@ -151,7 +149,7 @@ type LabeledNode<'n, 'p, 'e when 'e: equality> =
         member this.CompareTo(other) = this.CompareTo(other)
 
 
-type Term<'n, 'p, 'e when 'e: equality> (nodes: LabeledNode<'n, 'p, 'e> list, graph: Graph<PortID<'p, 'e>, 'p, Edge<'e>>)= 
+type Term<'n, 'p, 'e when 'e: equality> (nodes: LabeledNode<'n, 'p, 'e> list, graph: Graph<PortID<'p, 'e>, 'p ref, Edge<'e>>)= 
     member this.Nodes = nodes
         //and private set n = nodes <- n 
     member this.Graph = graph

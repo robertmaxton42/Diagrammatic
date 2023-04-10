@@ -54,7 +54,7 @@ type TermViewer () as this =
         if this.Dragging then
             this.Dragging <- false
             this.DraggedNode <- None
-            
+
             e.Handled <- true
 
     member this.OnCanvasPointerPressed(sender: obj, e: PointerPressedEventArgs) =
@@ -62,7 +62,7 @@ type TermViewer () as this =
             let position = e.GetPosition(this)
             this.ViewModel.AddNode (LabeledNode(
                 (this.ViewModel.Templates.Item 0).coinNode (this.ViewModel.GetUnusedID()),
-                {x = position.X; y = position.Y; z = 0}
+                ref {x = position.X; y = position.Y; z = 0}
             ))
             this.InvalidateVisual()
             e.Handled <- true

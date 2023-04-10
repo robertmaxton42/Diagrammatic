@@ -19,8 +19,8 @@ type EdgeViewData = { foo: int } //placeholder
 type NodeView = Node<PortViewData, EdgeViewData>
 //type MContextView = MContext<NodeView, NodeViewData, Edge>
 
-type LabeledNodeWrapper(node: Node<PortViewData, EdgeViewData>, label: NodeViewData) =
-  let mutable label = label
+type LabeledNodeWrapper(node: Node<PortViewData, EdgeViewData>, label: NodeViewData ref) =
+  let label = label
   let propertyChanged = new Event<_,_>()
   member val Node = node
 
@@ -29,18 +29,18 @@ type LabeledNodeWrapper(node: Node<PortViewData, EdgeViewData>, label: NodeViewD
     member this.PropertyChanged = propertyChanged.Publish
 
   member this.Label 
-    with get() = label
+    with get() = label.Value
     and set label' =
-      if not (label = label') then
-        label <- label'
+      if not (label.Value = label') then
+        label.Value <- label'
         propertyChanged.Trigger(this, PropertyChangedEventArgs("Label"))
 
 type TermViewerViewModel() as this = 
     inherit ViewModelBase()
 
     let basicNode2 = 
-      let portview1 = { segment = Segment 0; t = 0 }
-      let portview2 = { segment = Segment 0; t = System.Math.PI }
+      let portview1 = ref { segment = Segment 0; t = 0 }
+      let portview2 = ref { segment = Segment 0; t = System.Math.PI }
       NodeTemplate(SimpleNode("Z"), seq { 
         MutableGroup [
           Port({parent = None; group = 0; id = 0}, portview1)
@@ -51,8 +51,8 @@ type TermViewerViewModel() as this =
     let defaultTerm =
       let node1 = basicNode2.coinNode(0)
       let node2 = basicNode2.coinNode(1)
-      let ln1 = LabeledNode(node1, {x = 50; y = 50; z=1})
-      let ln2 = LabeledNode(node2, {x = 150; y = 50; z=0})
+      let ln1 = LabeledNode(node1, ref {x = 50; y = 50; z=1})
+      let ln2 = LabeledNode(node2, ref {x = 150; y = 50; z=1})
 
       Term([ln1; ln2], Graph.empty 
       |> Vertices.addMany (Seq.toList (seq {
