@@ -10,10 +10,14 @@
         xmlns:fgl="using:FSharp.FGL"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Diagrammatic.Core.Views.TermViewer"
-        x:DataType="vm:TermViewerViewModel">
+        x:DataType="vm:TermViewerViewModel"
+        x:CompileBindings="True"
+        PointerPressed="OnCanvasPointerPressed"
+        Background="Transparent"
+        >
 
-    <Border Width="800" Height="600">
-        <ItemsControl Items="{Binding nodes}" x:CompileBindings="True">
+    <Border Width="800" Height="600" BorderBrush="Black" BorderThickness="1">
+        <ItemsControl Items="{Binding Nodes, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas />

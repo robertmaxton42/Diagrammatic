@@ -1,7 +1,12 @@
 namespace Diagrammatic.Core.ViewModels
 
-open FSharp.FGL
 open Diagrammatic.Core
+
+open System.Reactive.Linq
+open System.ComponentModel
+
+open FSharp.FGL
+open ReactiveUI
 open Avalonia.Controls.Templates
 open Avalonia.Collections
 
@@ -15,27 +20,37 @@ type NodeView = Node<PortViewData, EdgeViewData>
 //type MContextView = MContext<NodeView, NodeViewData, Edge>
 
 type LabeledNodeWrapper(node: Node<PortViewData, EdgeViewData>, label: NodeViewData) =
+  let mutable label = label
+  let propertyChanged = new Event<_,_>()
   member val Node = node
-  member val Label = label with get, set
 
-type TermViewerViewModel() = 
+  interface INotifyPropertyChanged with
+    [<CLIEvent>]
+    member this.PropertyChanged = propertyChanged.Publish
+
+  member this.Label 
+    with get() = label
+    and set label' =
+      if not (label = label') then
+        label <- label'
+        propertyChanged.Trigger(this, PropertyChangedEventArgs("Label"))
+
+type TermViewerViewModel() as this = 
     inherit ViewModelBase()
 
-    let basicNode2 id kind =
+    let basicNode2 = 
       let portview1 = { segment = Segment 0; t = 0 }
       let portview2 = { segment = Segment 0; t = System.Math.PI }
-      let rec out = Node(id, SimpleNode(kind), 
-                      seq { seq {
-                          Port({parent = out; group = 0; id = 0}, portview1); 
-                          Port({parent = out; group = 0; id = 1}, portview2)
-                      }}
-                    )
-      out
-        
-
+      NodeTemplate(SimpleNode("Z"), seq { 
+        MutableGroup [
+          Port({parent = None; group = 0; id = 0}, portview1)
+          Port({parent = None; group = 0; id = 1}, portview2)
+        ]
+      })
+      
     let defaultTerm =
-      let node1 = basicNode2 0 "Z"
-      let node2 = basicNode2 0 "Z"      
+      let node1 = basicNode2.coinNode(0)
+      let node2 = basicNode2.coinNode(1)
       let ln1 = LabeledNode(node1, {x = 50; y = 50; z=1})
       let ln2 = LabeledNode(node2, {x = 150; y = 50; z=0})
 
@@ -47,13 +62,30 @@ type TermViewerViewModel() =
           })))
     
     let mutable term: Term<NodeViewData, PortViewData, EdgeViewData> = defaultTerm
-    member this.Term with get() = term and private set g = term <- g
-    member this.Nodes with get() = 
-      let nodeseq = seq {for LabeledNode(node, label) in term.Nodes -> new LabeledNodeWrapper(node, label)}
-      AvaloniaList<LabeledNodeWrapper>(nodeseq)
+    let nodes = 
+      let get_nodes (term: Term<_,_,_>) =
+        let nodeseq = seq { for LabeledNode(node, label) in term.Nodes -> new LabeledNodeWrapper(node, label) }
+        List.ofSeq nodeseq
+      let obs = (this.WhenAnyValue (fun tvvm -> tvvm.Term)).Select(get_nodes)
+      obs.ToProperty(this, "Nodes", List.empty, true)
+    
+    member val Templates = [basicNode2] with get, set
+    member this.Term 
+      with get() = term 
+      and private set term' = 
+        this.RaiseAndSetIfChanged (&term, term', "Term") |> ignore
+   
 
-    member this.AddNode node = term <- term.addNode node
-    member this.RemoveNode node = term <- term.removeNode node
+    member this.Nodes with get() = nodes.Value
+
+    //member this.Nodes with get() = 
+    //  let nodeseq = seq { for LabeledNode(node, label) in term.Nodes -> new LabeledNodeWrapper(node, label) }
+    //  AvaloniaList<LabeledNodeWrapper>(nodeseq)
+    member this.NodeIDs with get() = seq { for LabeledNode(node, _) in term.Nodes -> node.id }
+
+    member this.AddNode node = this.Term <- this.Term.addNode node
+    member this.RemoveNode node = this.Term <- this.Term.removeNode node
+    member this.GetUnusedID() = (Seq.max this.NodeIDs) + 1
 
 
 

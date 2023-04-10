@@ -85,16 +85,26 @@ and PortID<'p, 'e when 'e: equality> =
         (fun p -> p.parent), (fun n p -> {p with parent = Some n})
 and Port<'p, 'e when 'e: equality> = LVertex<PortID<'p, 'e>, 'p>
 and PortGroup<'p, 'e when 'e: equality> =
-    FixedGroup of Port<'p, 'e> array | MutableGroup of Port<'p, 'e> list
+    | FixedGroup of Port<'p, 'e> array 
+    | MutableGroup of Port<'p, 'e> list
+    
+    static member map f = function
+        | FixedGroup arr -> FixedGroup (Array.map f arr)
+        | MutableGroup l -> MutableGroup (List.map f l)
+
     interface System.Collections.Generic.IEnumerable<Port<'p,'e>> with
         member this.GetEnumerator() =
             match this with
-            | FixedGroup arr -> arr.GetEnumerator()
+            | FixedGroup arr -> (arr :> System.Collections.Generic.IEnumerable<_>).GetEnumerator()
             | MutableGroup l -> (List.toSeq l).GetEnumerator()
+
+    interface System.Collections.IEnumerable with
+        member this.GetEnumerator() =
+            (this :> System.Collections.Generic.IEnumerable<Port<'p,'e>>).GetEnumerator()
 
 //port_structure should be a collection of groups -- either an array of ports of the intended 
 // fixed size or a list with the default/starting number of ports. `parent` should be set to None.
-type NodeTemplate(kind: NodeKind<'p, 'e>, port_structure: PortGroup<'p, 'e> seq) =
+type NodeTemplate<'p, 'e when 'e: equality>(kind: NodeKind<'p, 'e>, port_structure: PortGroup<'p, 'e> seq) =
     member this.kind = kind 
     member this.port_structure = port_structure
 
@@ -103,9 +113,8 @@ type NodeTemplate(kind: NodeKind<'p, 'e>, port_structure: PortGroup<'p, 'e> seq)
         let rec out = 
             Node<'p, 'e>(id, kind, 
                 seq {
-                    for group in port_structure do
-                        for port in group -> 
-                            (out ^= parentLens) port 
+                    for group in port_structure ->
+                        PortGroup<_,_>.map (out ^= parentLens) group
                 }
             )
         out
@@ -140,6 +149,7 @@ type LabeledNode<'n, 'p, 'e when 'e: equality> =
 
     interface System.IComparable with
         member this.CompareTo(other) = this.CompareTo(other)
+
 
 type Term<'n, 'p, 'e when 'e: equality> (nodes: LabeledNode<'n, 'p, 'e> list, graph: Graph<PortID<'p, 'e>, 'p, Edge<'e>>)= 
     member this.Nodes = nodes

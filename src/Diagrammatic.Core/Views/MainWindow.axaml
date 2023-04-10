@@ -34,6 +34,6 @@
                 <MenuItem Header="Paste"/>
             </MenuItem>
         </Menu>
-        <v:TermViewer DockPanel.Dock="Bottom"/>
+        <v:TermViewer DockPanel.Dock="Bottom" Width="800" Height="600"/>
     </DockPanel>
 </Window>
