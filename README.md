@@ -6,9 +6,28 @@
 
 ## What is Diagrammatic?
 
-Diagrammatic is a tool designed to allow users to specify constraints on node-based diagrams, provide valid transformations for those node-based diagrams, and subsequently validate those constraints and transformations.
+Diagrammatic is a tool designed for the verification of *diagrammatic calculi* (also known simply as graphical notation): the systematic use of node-based diagrams to perform rigorous calculations in a graphical, two-dimensional way.
 
-<!-- TODO: Specific examples of different variations of diagram-based calculus that the tool supports? -->
+Graphical notations of this type share a number of common axioms:
+
+* They take the form of a graph (in the vertices-and-edges sense), where nodes represent objects (vectors, tensors, knots...) and edges relate and combine those objects (usually some sort of inner product or composable map)
+* "Only topology matters" -- graphs can be reorganized as if they were a projection of a real, three-dimensional network of objects connected by strings. "Twisting" two strings around each other sometimes matters, but simply repositioning objects never does.
+* They satisfy the properties of a category -- specifically, a [ribbon category](https://en.wikipedia.org/wiki/Ribbon_category)
+
+Specific examples of such notations include:
+
+* [Trace diagrams](https://en.wikipedia.org/wiki/Trace_diagram), useful in vector calculus and linear algebra
+* The [Penrose graphical notation](https://en.wikipedia.org/wiki/Penrose_graphical_notation), widely used in general relativity and implicitly in the design of [quantum circuits](https://en.wikipedia.org/wiki/Quantum_circuit)
+* The famous [Feynman diagrams](https://en.wikipedia.org/wiki/Feynman_diagram) used extensively in quantum field theory
+* The [ZX calculus](https://en.wikipedia.org/wiki/ZX-calculus), another method of simplifying and interpreting quantum circuits
+
+(No attempt is made to handle notations with higher-dimensional components such as [string diagrams](https://en.wikipedia.org/wiki/String_diagram) as applied to 2-categories. Perhaps in a later version.)
+
+Diagrammatic is heavily inspired by (https://quantomatic.github.io/)[Quantomatic], a similar tool designed specifically for the ZX calculus. However, unlike Quantomatic, Diagrammatic is:
+
+* **More general**: Designed from the ground up to handle anything a ribbon category can handle.
+* **Not written in Java**: Diagrammatic is written in F# and Avalonia for cross-platform performance not subject to the limitations of the JVM.
+* **Focused on proof verification, not generation**: Diagrammatic's goal is to be a method for putting existing diagrams and proofs into a digital format, validating them in the process. While it may acquire automatic simplification/canonicalization abilities later, this is not its main purpose. This separation allows users who just want to be able to check and share their work to do so without having to spend clock cycles on computationally expensive graph recognition algorithms.
 
 ## Getting Started
 
