@@ -10,9 +10,10 @@ Diagrammatic is a tool designed for the verification of *diagrammatic calculi* (
 
 Graphical notations of this type share a number of common axioms:
 
-* They take the form of a graph (in the vertices-and-edges sense), where nodes represent objects (vectors, tensors, knots...) and edges relate and combine those objects (usually some sort of inner product or composable map)
+* They take the form of a graph (in the vertices-and-edges sense), where nodes represent objects (vectors, tensors, knots...) and edges relate and combine those objects (usually some sort of inner product or composable map).
+* They are composable -- connecting a free edge to the free edge of another diagram ("in series") produces another valid diagram, and simply writing two diagrams next to each other ("in parallel") also produces a valid diagram.
 * "Only topology matters" -- graphs can be reorganized as if they were a projection of a real, three-dimensional network of objects connected by strings. "Twisting" two strings around each other sometimes matters, but simply repositioning objects never does.
-* They satisfy the properties of a category -- specifically, a [ribbon category](https://en.wikipedia.org/wiki/Ribbon_category)
+* As a result of the above, they satisfy the properties of a category -- specifically, a [ribbon category](https://en.wikipedia.org/wiki/Ribbon_category).
 
 Specific examples of such notations include:
 
@@ -23,9 +24,9 @@ Specific examples of such notations include:
 
 (No attempt is made to handle notations with higher-dimensional components such as [string diagrams](https://en.wikipedia.org/wiki/String_diagram) as applied to 2-categories. Perhaps in a later version.)
 
-Diagrammatic is heavily inspired by (https://quantomatic.github.io/)[Quantomatic], a similar tool designed specifically for the ZX calculus. However, unlike Quantomatic, Diagrammatic is:
+Diagrammatic is heavily inspired by [Quantomatic](https://quantomatic.github.io/), a similar tool designed specifically for the ZX calculus. However, unlike Quantomatic, Diagrammatic is:
 
-* **More general**: Designed from the ground up to handle anything a ribbon category can handle.
+* **More general**: Designed from the ground up to handle anything a ribbon category can handle, plus additional operators like sums and the Penrose derivative.
 * **Not written in Java**: Diagrammatic is written in F# and Avalonia for cross-platform performance not subject to the limitations of the JVM.
 * **Focused on proof verification, not generation**: Diagrammatic's goal is to be a method for putting existing diagrams and proofs into a digital format, validating them in the process. While it may acquire automatic simplification/canonicalization abilities later, this is not its main purpose. This separation allows users who just want to be able to check and share their work to do so without having to spend clock cycles on computationally expensive graph recognition algorithms.
 
