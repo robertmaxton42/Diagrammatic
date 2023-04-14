@@ -7,15 +7,16 @@ open System.ComponentModel
 
 open FSharp.FGL
 open ReactiveUI
+open Avalonia.Controls.Shapes
 open Avalonia.Controls.Templates
 open Avalonia.Collections
 
-type NodeViewData = { x: float; y: float; z: int }
+type NodeViewData = { x: float; y: float; z: int; is_selected: bool }
 type Segment = 
   Segment of id: int | Subsegment of group: int * id: int
   
 type PortViewData = { segment: Segment; t: float }
-type EdgeViewData = { foo: int } //placeholder
+type EdgeViewData = { path: Path } 
 type NodeView = Node<PortViewData, EdgeViewData>
 //type MContextView = MContext<NodeView, NodeViewData, Edge>
 
@@ -51,8 +52,8 @@ type TermViewerViewModel() as this =
     let defaultTerm =
       let node1 = basicNode2.coinNode(0)
       let node2 = basicNode2.coinNode(1)
-      let ln1 = LabeledNode(node1, ref {x = 50; y = 50; z=1})
-      let ln2 = LabeledNode(node2, ref {x = 150; y = 50; z=1})
+      let ln1 = LabeledNode(node1, ref {x = 50; y = 50; z=1; is_selected=false})
+      let ln2 = LabeledNode(node2, ref {x = 150; y = 50; z=1; is_selected=false})
 
       Term([ln1; ln2], Graph.empty 
       |> Vertices.addMany (Seq.toList (seq {

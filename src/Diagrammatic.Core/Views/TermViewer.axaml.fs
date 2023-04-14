@@ -62,7 +62,7 @@ type TermViewer () as this =
             let position = e.GetPosition(this)
             this.ViewModel.AddNode (LabeledNode(
                 (this.ViewModel.Templates.Item 0).coinNode (this.ViewModel.GetUnusedID()),
-                ref {x = position.X; y = position.Y; z = 0}
+                ref {x = position.X; y = position.Y; z = 0; is_selected = false}
             ))
             this.InvalidateVisual()
             e.Handled <- true
