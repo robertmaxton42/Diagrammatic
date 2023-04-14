@@ -101,7 +101,7 @@ type NodeControl() as this =
     do this.InitializeComponent()
     
     member this.Node with get() = this.DataContext :?> LabeledNodeWrapper
-    member this.Ports with get(): Port<PortViewData, EdgeViewData> seq = 
+    member this.Ports with get(): LabeledPort<PortViewData, EdgeViewData> seq = 
         seq {
             for group in this.Node.Node.ports do
                 for port in group -> port
@@ -134,7 +134,7 @@ type NodeControl() as this =
     member private this.RenderPorts() =
         this.RenderedPorts <- AvaloniaList(
             Seq.map 
-                (fun (port: Port<_,_>) -> getPortPoint (snd port).Value) 
+                (fun (port: LabeledPort<_,_>) -> getPortPoint (snd port).Value) 
                 this.Ports
             )
 

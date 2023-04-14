@@ -16,29 +16,40 @@
         Background="Transparent"
         >
 
-    <Border Width="800" Height="600" BorderBrush="Black" BorderThickness="1">
-        <ItemsControl Items="{Binding Nodes, Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.Styles>
-                <Style Selector="ContentPresenter"
-                        x:DataType="vm:LabeledNodeWrapper"> 
-                    <Setter Property="Canvas.Left" Value="{Binding Label.x}" />
-                    <Setter Property="Canvas.Top" Value="{Binding Label.y}" />
-                </Style>
-            </ItemsControl.Styles>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="vm:LabeledNodeWrapper">
-                    <v:NodeControl 
-                        PointerPressed="OnNodePointerPressed" 
-                        PointerMoved="OnNodePointerMoved" 
-                        PointerReleased="OnNodePointerReleased" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Border>
+  <Border Width="800" Height="600" BorderBrush="Black" BorderThickness="1">
+    <Grid>
+      <!-- Edges ItemsControl -->
+      <ItemsControl Items="{Binding Edges, Mode=OneWay}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:LabeledEdgeWrapper">
+            <Path Data="{Binding Label.path}" Stroke="Black" StrokeThickness="2" />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+      <!--Nodes ItemsControl-->
+      <ItemsControl Items="{Binding Nodes, Mode=OneWay}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <Canvas />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.Styles>
+          <Style Selector="ContentPresenter"
+                x:DataType="vm:LabeledNodeWrapper"> 
+            <Setter Property="Canvas.Left" Value="{Binding Label.x}" />
+            <Setter Property="Canvas.Top" Value="{Binding Label.y}" />
+          </Style>
+        </ItemsControl.Styles>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:LabeledNodeWrapper">
+            <v:NodeControl 
+              PointerPressed="OnNodePointerPressed" 
+              PointerMoved="OnNodePointerMoved" 
+              PointerReleased="OnNodePointerReleased" />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </Grid>
+  </Border>
 </Canvas>
 

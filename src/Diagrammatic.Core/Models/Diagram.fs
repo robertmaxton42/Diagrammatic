@@ -36,7 +36,7 @@ open Aether.Operators
 
 
 type EdgeData = SimpleEdge of string
-type Edge<'label when 'label: equality> = 
+type DiagramEdge<'label when 'label: equality> = 
     struct
         val data: EdgeData
         val label: 'label ref
@@ -78,21 +78,21 @@ type Node<'p, 'e when 'e: equality> =
             member this.CompareTo(other) = this.CompareTo(other)
     end
 and NodeKind<'p, 'e when 'e: equality> = OpNode of Op<'p, 'e> | SimpleNode of string
-and Op<'p, 'e when 'e: equality> = {op: string; subg: Graph<PortID<'p, 'e>, 'p, Edge<'e>>}
-and PortID<'p, 'e when 'e: equality> = 
+and Op<'p, 'e when 'e: equality> = {op: string; subg: Graph<Port<'p, 'e>, 'p, DiagramEdge<'e>>}
+and Port<'p, 'e when 'e: equality> = 
     { parent: Node<'p, 'e> option; group: int; id: int }
-    static member parent_: Prism<PortID<'p, 'e>, _> =
+    static member parent_: Prism<Port<'p, 'e>, _> =
         (fun p -> p.parent), (fun n p -> {p with parent = Some n})
-and Port<'p, 'e when 'e: equality> = LVertex<PortID<'p, 'e>, 'p ref>
+and LabeledPort<'p, 'e when 'e: equality> = LVertex<Port<'p, 'e>, 'p ref>
 and PortGroup<'p, 'e when 'e: equality> =
-    | FixedGroup of Port<'p, 'e> array 
-    | MutableGroup of Port<'p, 'e> list
+    | FixedGroup of LabeledPort<'p, 'e> array 
+    | MutableGroup of LabeledPort<'p, 'e> list
     
     static member map f = function
         | FixedGroup arr -> FixedGroup (Array.map f arr)
         | MutableGroup l -> MutableGroup (List.map f l)
 
-    interface System.Collections.Generic.IEnumerable<Port<'p,'e>> with
+    interface System.Collections.Generic.IEnumerable<LabeledPort<'p,'e>> with
         member this.GetEnumerator() =
             match this with
             | FixedGroup arr -> (arr :> System.Collections.Generic.IEnumerable<_>).GetEnumerator()
@@ -100,7 +100,7 @@ and PortGroup<'p, 'e when 'e: equality> =
 
     interface System.Collections.IEnumerable with
         member this.GetEnumerator() =
-            (this :> System.Collections.Generic.IEnumerable<Port<'p,'e>>).GetEnumerator()
+            (this :> System.Collections.Generic.IEnumerable<LabeledPort<'p,'e>>).GetEnumerator()
 
 //port_structure should be a collection of groups -- either an array of ports of the intended 
 // fixed size or a list with the default/starting number of ports. `parent` should be set to None.
@@ -109,7 +109,7 @@ type NodeTemplate<'p, 'e when 'e: equality>(kind: NodeKind<'p, 'e>, port_structu
     member this.port_structure = port_structure
 
     member this.coinNode id = 
-        let parentLens = fst_ >-> PortID.parent_
+        let parentLens = fst_ >-> Port.parent_
         let rec out = 
             Node<'p, 'e>(id, kind, 
                 seq {
@@ -149,7 +149,7 @@ type LabeledNode<'n, 'p, 'e when 'e: equality> =
         member this.CompareTo(other) = this.CompareTo(other)
 
 
-type Term<'n, 'p, 'e when 'e: equality> (nodes: LabeledNode<'n, 'p, 'e> list, graph: Graph<PortID<'p, 'e>, 'p ref, Edge<'e>>)= 
+type Term<'n, 'p, 'e when 'e: equality> (nodes: LabeledNode<'n, 'p, 'e> list, graph: Graph<Port<'p, 'e>, 'p ref, DiagramEdge<'e>>)= 
     member this.Nodes = nodes
         //and private set n = nodes <- n 
     member this.Graph = graph

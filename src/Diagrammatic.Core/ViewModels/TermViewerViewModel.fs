@@ -6,24 +6,46 @@ open System.Reactive.Linq
 open System.ComponentModel
 
 open FSharp.FGL
+open FSharp.FGL.Directed
+
 open ReactiveUI
+
+open Avalonia
+open Avalonia.Media
 open Avalonia.Controls.Shapes
 open Avalonia.Controls.Templates
 open Avalonia.Collections
+open AvaloniaExtensions
 
 type NodeViewData = { x: float; y: float; z: int; is_selected: bool }
 type Segment = 
   Segment of id: int | Subsegment of group: int * id: int
   
 type PortViewData = { segment: Segment; t: float }
-type EdgeViewData = { path: Path } 
+type EdgeViewData = { path: PathGeometry } 
 type NodeView = Node<PortViewData, EdgeViewData>
 //type MContextView = MContext<NodeView, NodeViewData, Edge>
 
-type LabeledNodeWrapper(node: Node<PortViewData, EdgeViewData>, label: NodeViewData ref) =
-  let label = label
+type LabeledNodeWrapper (ln: LabeledNode<NodeViewData, PortViewData, EdgeViewData>) =
+  let (LabeledNode(node, label)) = ln
   let propertyChanged = new Event<_,_>()
   member val Node = node
+
+  interface INotifyPropertyChanged with
+    [<CLIEvent>]
+    member this.PropertyChanged = propertyChanged.Publish
+
+  member this.Label 
+    with get() = label.Value
+    and set label' =
+      if not (label.Value = label') then
+        label.Value <- label'
+        propertyChanged.Trigger(this, PropertyChangedEventArgs("Label"))
+
+type LabeledEdgeWrapper(edge: DiagramEdge<EdgeViewData>) =
+  let label = edge.label
+  let propertyChanged = new Event<_,_>()
+  member val Edge = edge.data
 
   interface INotifyPropertyChanged with
     [<CLIEvent>]
@@ -44,8 +66,8 @@ type TermViewerViewModel() as this =
       let portview2 = ref { segment = Segment 0; t = System.Math.PI }
       NodeTemplate(SimpleNode("Z"), seq { 
         MutableGroup [
-          Port({parent = None; group = 0; id = 0}, portview1)
-          Port({parent = None; group = 0; id = 1}, portview2)
+          LabeledPort({parent = None; group = 0; id = 0}, portview1)
+          LabeledPort({parent = None; group = 0; id = 1}, portview2)
         ]
       })
       
@@ -55,20 +77,31 @@ type TermViewerViewModel() as this =
       let ln1 = LabeledNode(node1, ref {x = 50; y = 50; z=1; is_selected=false})
       let ln2 = LabeledNode(node2, ref {x = 150; y = 50; z=1; is_selected=false})
 
+      let port_start = fst <| Seq.item 1 (Seq.item 0 node1.ports)
+      let port_end = fst <| Seq.item 0 (Seq.item 0 node2.ports)
+      let path = PathGeometry.BezierFromPoints (Point(50, 50)) (Point(50, 100)) (Point(150, 100)) (Point(150, 50))
+      let edge = DiagramEdge(SimpleEdge(""), ref { path = path })
+
       Term([ln1; ln2], Graph.empty 
-      |> Vertices.addMany (Seq.toList (seq {
-            for n in [node1; node2] do
-              for plist in n.ports do
-                for p in plist -> p
-          })))
+        |> Vertices.addMany (Seq.toList (seq {
+              for n in [node1; node2] do
+                for plist in n.ports do
+                  for p in plist -> p
+            }))
+        |> Edges.add (port_start, port_end, edge)
+      )
     
     let mutable term: Term<NodeViewData, PortViewData, EdgeViewData> = defaultTerm
     let nodes = 
       let get_nodes (term: Term<_,_,_>) =
-        let nodeseq = seq { for LabeledNode(node, label) in term.Nodes -> new LabeledNodeWrapper(node, label) }
-        List.ofSeq nodeseq
+        List.map LabeledNodeWrapper term.Nodes
       let obs = (this.WhenAnyValue (fun tvvm -> tvvm.Term)).Select(get_nodes)
       obs.ToProperty(this, "Nodes", List.empty, true)
+    let edges = 
+      let get_edges (term: Term<_,_,_>) = 
+        List.map (fun (_, _, edge) -> LabeledEdgeWrapper edge) <| Edges.toEdgeList term.Graph
+      let obs = (this.WhenAnyValue (fun tvvm -> tvvm.Term)).Select(get_edges)
+      obs.ToProperty(this, "Edges", List.empty, true)
     
     member val Templates = [basicNode2] with get, set
     member this.Term 
@@ -78,6 +111,7 @@ type TermViewerViewModel() as this =
    
 
     member this.Nodes with get() = nodes.Value
+    member this.Edges with get() = edges.Value
 
     //member this.Nodes with get() = 
     //  let nodeseq = seq { for LabeledNode(node, label) in term.Nodes -> new LabeledNodeWrapper(node, label) }
