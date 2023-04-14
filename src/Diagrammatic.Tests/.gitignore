@@ -9,7 +9,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.cache
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -306,6 +305,7 @@ node_modules/
 _Pvt_Extensions
 
 # Paket dependency manager
+.paket/paket.exe
 paket-files/
 
 # FAKE - F# Make
@@ -452,6 +452,3 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-# Conventional Commit Configuration
-.czrc
