@@ -16,8 +16,11 @@
     <Compile Include="ViewModels\ViewModelBase.fs" />
     <Compile Include="ViewModels\TermViewerViewModel.fs" />
     <Compile Include="ViewModels\MainWindowViewModel.fs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Views\CenteredEllipse.axaml.fs" />
     <Compile Include="Views\NodeControl.axaml.fs" />
+    <Compile Include="Views\EdgeControl.axaml.fs" />
     <Compile Include="Views\TermViewer.axaml.fs" />
     <Compile Include="Views\TermBuilder.axaml.fs" />
     <Compile Include="Views\MainWindow.axaml.fs" />

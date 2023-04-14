@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="using:Diagrammatic.Core.Views"
+             xmlns:vm="using:Diagrammatic.Core.ViewModels"
+             xmlns:ac="using:Avalonia.Collections"
+             x:Class="Diagrammatic.Core.Views.EdgeControl"
+             x:DataType="vm:LabeledEdgeWrapper"
+             mc:Ignorable="d"
+             d:DesignWidth="100"
+             d:DesignHeight="100" ClipToBounds="False">
+
+
+</UserControl>

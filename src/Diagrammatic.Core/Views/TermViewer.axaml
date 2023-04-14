@@ -22,7 +22,7 @@
       <ItemsControl Items="{Binding Edges, Mode=OneWay}">
         <ItemsControl.ItemTemplate>
           <DataTemplate x:DataType="vm:LabeledEdgeWrapper">
-            <Path Data="{Binding Label.path}" Stroke="Black" StrokeThickness="2" />
+            <Path Data="{Binding Label.path}" Stroke="Black" StrokeThickness="{Binding Label.thickness}" />
           </DataTemplate>
         </ItemsControl.ItemTemplate>
       </ItemsControl>
